@@ -29,6 +29,8 @@ The `splitbyprompt.py` script performs the following functions:
 
 The table below summarizes the split of each CSV file into training and testing sets:
 
+Split by 10% episode:
+
 | Dataset Category        | Total Unique Episodes | Unique Episodes in Test Set | Unique Episodes in Train Set |
 |----------------------|-----------------------|-----------------------------|------------------------------|
 | `SINGLE`          | 26303                 | 2631                        | 23672                        |
@@ -37,6 +39,8 @@ The table below summarizes the split of each CSV file into training and testing 
 | `INSTALL`          | 25761     | 2577        | 23184        |
 | `WEBSHOPPING`          | 28062     | 2807| 25255        |
 
+Split by Prompt (10% for googleapps, install, general and 1% for webshopping, single):
+
 | Dataset Category        | Total Unique Prompts | Unique Prompts in Test Set | Unique Prompts in Train Set |
 |----------------------|-----------------------|-----------------------------|------------------------------|
 | `SINGLE`          | 15366                 | 154                        | 15212                        |
@@ -44,6 +48,16 @@ The table below summarizes the split of each CSV file into training and testing 
 | `GOOGLEAPPS`          | 306     | 31        | 275        |
 | `INSTALL`          | 689     | 69        | 620        |
 | `WEBSHOPPING`          | 13474     | 135| 13339        |
+
+Randomly choose one episode for each prompt in the testsetbyprompt:
+
+| Dataset Category        | Total Unique Episodes in TestsetbyPrompt | Chosen Unique Episodes |
+|----------------------|-----------------------|-----------------------------|
+| `SINGLE`          | 546                 | 154                        |
+| `GENERAL`          | 10196     | 55        |
+| `GOOGLEAPPS`          | 265     | 31        |
+| `INSTALL`          | 623     | 69        |
+| `WEBSHOPPING`          | 1926     | 135|
 
 ## File Structure in Phoenix
 
@@ -56,8 +70,15 @@ The table below summarizes the split of each CSV file into training and testing 
 │   ├── all_single.csv
 │   └── all_webshopping.csv
 ├── code
-│   ├── split2test.py
+│   ├── randomepisode.py
+│   ├── splitbyepisode.py
 │   └── splitbyprompt.py
+├── randomepisode
+│   ├── randomepisode_general.csv
+│   ├── randomepisode_googleapps.csv
+│   ├── randomepisode_install.csv
+│   ├── randomepisode_single.csv
+│   └── randomepisode_webshopping.csv
 ├── README.md
 ├── testsetbyepisode
 │   ├── test_general.csv
@@ -92,8 +113,9 @@ The table below summarizes the split of each CSV file into training and testing 
 3. Run the script using the command:
 
    ```shell
-   python split2test.py
+   python splitbyepisode.py
    python splitbyprompt.py
+   python randomepisode.py
    ```
 
 4. Check the console for the print outputs and the root directory for the generated CSV files.
